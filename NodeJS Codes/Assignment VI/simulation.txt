@@ -1,0 +1,45 @@
+cd tutorials.IoT-over-MQTT
+./services create
+./services start
+
+winpty docker run -it --rm --name mqtt-subscriber \
+  --network fiware_default efrecon/mqtt-client sub -h mosquitto -t "/#"
+
+curl -iX POST \
+  'http://localhost:4041/iot/devices' \
+  -H 'Content-Type: application/json' \
+  -H 'fiware-service: openiot' \
+  -H 'fiware-servicepath: /' \
+  -d '{
+ "devices": [
+   {
+     "device_id":   "smartwatch001",
+     "entity_name": "urn:ngsi-ld:Smartwatch:001",
+     "entity_type": "Motion",
+     "protocol":    "PDI-IoTA-UltraLight",
+     "transport":   "MQTT",
+     "timezone":    "Europe/Berlin",
+     "attributes": [
+       { "object_id": "P", "name": "Pressure", "type": "Integer" }
+     ],
+     "commands": [
+        { "name": "ring", "type": "command" }
+       ],
+     "static_attributes": [
+       { "name":"refStore", "type": "Relationship", "value": "urn:ngsi-ld:Store:001"}
+     ]
+   }
+ ]
+}
+'
+
+
+
+winpty docker run -it --rm --name mqtt-publisher --network \
+  fiware_default efrecon/mqtt-client pub -h mosquitto -m "Pressure: 150" \
+  -t "/ul/4jggokgpepnvsb2uv4s40d59ov/smartwatch001/attrs"
+
+winpty docker run -it --rm --name mqtt-publisher --network \
+  fiware_default efrecon/mqtt-client pub -h mosquitto -m "Pressure: 180" \
+  -t "/ul/4jggokgpepnvsb2uv4s40d59ov/smartwatch001/attrs"
+

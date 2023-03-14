@@ -1,0 +1,3 @@
+[{"air quality":"yellow","temperature":20,"sea conditions":3,"city":"Genova"},
+ {"city":"Milano","air quality":"red","temperature":10},
+ {"city":"Torino","air quality":"red","temperature":8}]
