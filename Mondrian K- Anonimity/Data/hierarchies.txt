@@ -1,0 +1,16 @@
+-
+Cuba,North America,America,World
+Jamaica,North America,America,World
+Canada,North America,America,World
+Columbia,South America,America,World
+Ecuador,South America,America,World
+England,Central Europe,Europe,World
+Portugal,West Europe,Europe,World
+Ireland,West Europe,Europe,World
+Japan,East Asia,Asia,World
+-
+Teacher,Scholastic,Any
+University Teacher,Scholastic,Any
+Post Office,State,Any
+Police,State,Any
+Office,Private,Any

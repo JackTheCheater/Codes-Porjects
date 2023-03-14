@@ -1,0 +1,4 @@
+Age,NUMERICAL
+Birthplace,CATEGORICAL
+Occupation,CATEGORICAL
+Annual Income,SD
